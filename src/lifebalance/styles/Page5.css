@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  max-width: 100vw;
+  width: 100%;
+  max-width: 90vw;
   padding: 4vw;
   box-sizing: border-box;
   min-height: 100vh;
-  margin: 0;
+  margin: 0 auto;
   overflow-x: hidden;
 }
 
@@ -193,6 +193,8 @@
 @media (max-width: 768px) {
   .page5-container {
     padding: 3vw;
+    max-width: 95vw;
+    margin: 0 auto;
   }
   
   .page5-title,
@@ -357,6 +359,7 @@
   .page5-container {
     padding: 5vw;
     max-width: 800px;
+    margin: 0 auto;
   }
   
   .page5-title,
