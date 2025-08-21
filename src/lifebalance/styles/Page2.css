@@ -648,6 +648,8 @@
   align-items: center;
   width: 100%;
   max-width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .page2-title {
@@ -855,7 +857,7 @@
 @media (max-width: 768px) {
   .page2-form {
     min-height: 500px;
-    padding: 0 0.75rem;
+    padding: 0 1rem;
   }
   
   .page2-title {
@@ -873,18 +875,20 @@
      .page2-cards-wrapper {
      gap: 1rem;
      margin-bottom: 1.5rem;
-     width: 100%;
-     max-width: 100%;
+     width: calc(100% - 2rem);
+     max-width: calc(100% - 2rem);
      padding-bottom: 2rem;
+     margin-left: 1rem;
+     margin-right: 1rem;
    }
   
   .page2-card {
     padding: 0.875rem;
     border-radius: 12px;
-    width: calc(100% - 1rem);
-    max-width: calc(100% - 1rem);
+    width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
-    margin: 0 0.5rem;
+    margin: 0;
   }
   
   .page2-card-label {
@@ -944,11 +948,11 @@
     padding: 0.875rem;
     margin-top: 1.25rem;
     font-size: 0.75rem;
-    width: calc(100% - 1rem);
-    max-width: calc(100% - 1rem);
+    width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 

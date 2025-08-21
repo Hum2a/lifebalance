@@ -460,7 +460,7 @@
 @media (max-width: 768px) {
   .page3-form {
     min-height: 500px;
-    padding: 0 0.75rem;
+    padding: 0 1rem;
   }
   
   .page3-title {
@@ -800,9 +800,11 @@
   .page3-cards-wrapper {
     gap: 1rem;
     margin-bottom: 1.5rem;
-    width: 100%;
-    max-width: 100%;
+    width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
     padding-bottom: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   
   .page3-next-btn {
