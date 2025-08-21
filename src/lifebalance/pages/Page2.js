@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactSlider from 'react-slider';
+import * as Slider from '@radix-ui/react-slider';
 import '../styles/Page2.css';
 import '../styles/buttons.css';
 
@@ -134,23 +134,21 @@ const Page2 = ({ onSubmit, onStepChange }) => {
                   </div>
                 </div>
                 <div style={{position: 'relative', width: '100%', height: '44px'}}>
-                  <ReactSlider
-                    min={0}
-                    max={10}
-                    value={scores[idx]}
-                    onChange={(value) => handleSliderChange(idx, value)}
+                  <Slider.Root
                     className="page2-slider"
-                    thumbClassName="page2-slider-thumb"
-                    trackClassName="page2-slider-track"
-                    renderThumb={(props, state) => (
-                      <div {...props} className="page2-slider-thumb">
-                        <span className="page2-slider-value-inside">{state.valueNow}</span>
-                      </div>
-                    )}
-                    renderTrack={(props, state) => (
-                      <div {...props} className={`page2-slider-track ${state.index === 0 ? 'filled' : 'unfilled'}`}></div>
-                    )}
-                  />
+                    value={[scores[idx]]}
+                    onValueChange={(value) => handleSliderChange(idx, value[0])}
+                    max={10}
+                    min={0}
+                    step={1}
+                  >
+                    <Slider.Track className="page2-slider-track">
+                      <Slider.Range className="page2-slider-track-filled" />
+                    </Slider.Track>
+                    <Slider.Thumb className="page2-slider-thumb">
+                      <span className="page2-slider-value-inside">{scores[idx]}</span>
+                    </Slider.Thumb>
+                  </Slider.Root>
                 </div>
                 <div className="page2-slider-labels">
                   <span className="page2-slider-label">Needs work (0)</span>
