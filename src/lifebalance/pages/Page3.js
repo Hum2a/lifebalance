@@ -191,16 +191,6 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
               <div className="page2-card-prompt">{area.prompt}</div>
               <div className="page3-prev-label">Previous Selection</div>
               <div className="page2-slider-row">
-                <div className="page2-slider-arrows">
-                  <div className="page2-slider-arrow left">
-                    <div className="page2-slider-arrow-line"></div>
-                    <div className="page2-slider-arrow-down"></div>
-                  </div>
-                  <div className="page2-slider-arrow right">
-                    <div className="page2-slider-arrow-line"></div>
-                    <div className="page2-slider-arrow-down"></div>
-                  </div>
-                </div>
                 <div style={{position: 'relative', width: '100%', height: '44px'}}>
                   <ReactSlider
                     min={0}
@@ -226,16 +216,6 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
                 </div>
               </div>
               <div className="page2-slider-row">
-                <div className="page2-slider-arrows">
-                  <div className="page2-slider-arrow left">
-                    <div className="page2-slider-arrow-line"></div>
-                    <div className="page2-slider-arrow-down"></div>
-                  </div>
-                  <div className="page2-slider-arrow right">
-                    <div className="page2-slider-arrow-line"></div>
-                    <div className="page2-slider-arrow-down"></div>
-                  </div>
-                </div>
                 <div style={{position: 'relative', width: '100%', height: '44px'}}>
                   <ReactSlider
                     min={0}
