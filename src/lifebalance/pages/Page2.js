@@ -76,12 +76,28 @@ const Page2 = ({ onSubmit, onStepChange }) => {
       setRevealed(nextRevealed);
       // Set the newly revealed card index
       setNewlyRevealedCard(nextRevealed - 1);
-      // Smooth scroll to bottom after revealing new card
+      
+      // Smart scroll to show the newly revealed card
       setTimeout(() => {
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: 'smooth'
-        });
+        const cards = document.querySelectorAll('.page2-card');
+        if (cards.length > 0) {
+          const lastVisibleCard = cards[nextRevealed - 1]; // Index of the newly revealed card
+          if (lastVisibleCard) {
+            // Calculate position to show the card with some padding
+            const cardTop = lastVisibleCard.offsetTop;
+            const cardHeight = lastVisibleCard.offsetHeight;
+            const viewportHeight = window.innerHeight;
+            const scrollTarget = cardTop - (viewportHeight / 2) + (cardHeight / 2);
+            
+            // Ensure we don't scroll past the top
+            const finalScrollTarget = Math.max(0, scrollTarget);
+            
+            window.scrollTo({
+              top: finalScrollTarget,
+              behavior: 'smooth'
+            });
+          }
+        }
       }, 100); // Small delay to ensure the new card is rendered
     } else {
       if (onSubmit) onSubmit(scores);
@@ -95,7 +111,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
         Slide to rate each part of your life from<br/>
         <span className="page2-desc-em">0 <i>(needs attention)</i> to 10 <i>(doing great)</i>.</span>
       </p>
-      <div className="page2-cards-wrapper" style={{minHeight: '340px', position: 'relative'}}>
+      <div className="page2-cards-wrapper" style={{position: 'relative'}}>
         {LIFE_AREAS.slice(0, revealed).map((area, idx) => {
           const colorClass = idx % 3 === 0 ? 'card-dark' : idx % 3 === 1 ? 'card-green' : 'card-pink';
           const isNewlyRevealed = idx === newlyRevealedCard; // Use the tracked newly revealed card

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles/LifeBalance.css';
 import './styles/buttons.css';
@@ -28,6 +28,20 @@ const LifeBalance = () => {
   const [page3Step, setPage3Step] = useState(1); // For progressive reveal on Page 3
   const [page4Step, setPage4Step] = useState(1); // For progressive reveal on Page 4
   const navigate = useNavigate();
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    // Immediate scroll to top for better UX
+    window.scrollTo(0, 0);
+    
+    // Smooth scroll to top for visual effect
+    setTimeout(() => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }, 100);
+  }, [currentPage]);
 
   // Navigation handlers
   const handleWelcomeNext = () => setCurrentPage(2);

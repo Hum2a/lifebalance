@@ -405,14 +405,15 @@
 
   /* Card layout and colors */
   .page2-cards-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    width: 100%;
-    max-width: 700px;
-    margin: 2rem auto 2.5rem auto;
-    padding-bottom: 8rem;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto 2.5rem auto;
+  padding-bottom: 2rem;
+  min-height: fit-content;
+}
 
   .page2-card {
     width: 100%;
@@ -874,7 +875,7 @@
      margin-bottom: 1.5rem;
      width: 100%;
      max-width: 100%;
-     padding-bottom: 6rem;
+     padding-bottom: 2rem;
    }
   
   .page2-card {

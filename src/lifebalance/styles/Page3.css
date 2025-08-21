@@ -785,14 +785,15 @@
 }
 
 /* Cards wrapper with bottom padding to prevent button overlap */
-.page3-cards-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  padding-bottom: 8rem;
-}
+  .page3-cards-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    min-height: fit-content;
+  }
 
 /* Mobile-first responsive design for cards wrapper */
 @media (max-width: 768px) {
@@ -801,7 +802,7 @@
     margin-bottom: 1.5rem;
     width: 100%;
     max-width: 100%;
-    padding-bottom: 6rem;
+    padding-bottom: 2rem;
   }
   
   .page3-next-btn {
@@ -821,7 +822,7 @@
     margin-bottom: 2rem;
     width: 100%;
     max-width: 100%;
-    padding-bottom: 8rem;
+    padding-bottom: 2rem;
   }
   
   .page3-next-btn {

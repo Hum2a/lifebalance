@@ -57,12 +57,27 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
     }
     if (revealed < LIFE_AREAS.length) {
       setRevealed(revealed + 1);
-      // Smooth scroll to bottom after revealing new card
+      // Smart scroll to show the newly revealed card
       setTimeout(() => {
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: 'smooth'
-        });
+        const cards = document.querySelectorAll('.page2-card');
+        if (cards.length > 0) {
+          const lastVisibleCard = cards[revealed]; // Index of the newly revealed card
+          if (lastVisibleCard) {
+            // Calculate position to show the card with some padding
+            const cardTop = lastVisibleCard.offsetTop;
+            const cardHeight = lastVisibleCard.offsetHeight;
+            const viewportHeight = window.innerHeight;
+            const scrollTarget = cardTop - (viewportHeight / 2) + (cardHeight / 2);
+            
+            // Ensure we don't scroll past the top
+            const finalScrollTarget = Math.max(0, scrollTarget);
+            
+            window.scrollTo({
+              top: finalScrollTarget,
+              behavior: 'smooth'
+            });
+          }
+        }
       }, 100); // Small delay to ensure the new card is rendered
     } else {
       if (onFinish) onFinish(newScores);
@@ -165,7 +180,7 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
         Now <b>slide</b> to rate what you think your score in each factor will be from <br/>
         <span style={{fontStyle: 'italic', fontWeight: 600}}>0 (needs work) to 10 (thriving).</span>
       </p>
-      <div className="page2-cards-wrapper" style={{minHeight: '340px', position: 'relative'}}>
+      <div className="page2-cards-wrapper" style={{position: 'relative'}}>
         {LIFE_AREAS.slice(0, revealed).map((area, idx) => {
           const colorClass = idx % 3 === 0 ? 'card-dark' : idx % 3 === 1 ? 'card-green' : 'card-pink';
           return (
