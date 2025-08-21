@@ -80,40 +80,73 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
         <h2 className="page2-title" style={{marginBottom: '2.5rem'}}>
           <span style={{color: '#97A1FF'}}>Now imagine a</span> full year's salary lands in your<br/>bank account <span style={{color: '#97A1FF'}}>tomorrow.</span>
         </h2>
-        <div className="page2-cards-wrapper" style={{minHeight: 'unset', margin: '0 auto 2.5rem auto', maxWidth: 500}}>
-          <div className="page2-card card-dark">
-            <div className="page2-slider-row" style={{margin: 0}}>
-              <div className="page2-slider-arrows">
-                <div className="page2-slider-arrow left">
-                  <div className="page2-slider-arrow-line"></div>
-                  <div className="page2-slider-arrow-down"></div>
-                </div>
-                <div className="page2-slider-arrow right">
-                  <div className="page2-slider-arrow-line"></div>
-                  <div className="page2-slider-arrow-down"></div>
-                </div>
-              </div>
-              <div style={{position: 'relative', width: '100%', height: '44px'}}>
-                <ReactSlider
-                  min={0}
-                  max={10}
-                  value={4}
-                  disabled
-                  className="page2-slider"
-                  thumbClassName="page2-slider-thumb"
-                  trackClassName="page2-slider-track"
-                  renderThumb={(props, state) => (
-                    <div {...props} className="page2-slider-thumb">
-                      <span className="page2-slider-value-inside">{state.valueNow}</span>
-                    </div>
-                  )}
-                  renderTrack={(props, state) => (
-                    <div {...props} className={`page2-slider-track ${state.index === 0 ? 'filled' : 'unfilled'}`}></div>
-                  )}
-                />
-              </div>
-            </div>
-          </div>
+        <div className="tutorial-visual" style={{
+          background: 'linear-gradient(135deg, rgba(183, 155, 255, 0.1), rgba(97, 161, 255, 0.1))',
+          border: '1px solid rgba(183, 155, 255, 0.3)',
+          borderRadius: '20px',
+          padding: '2rem',
+          margin: '2rem auto',
+          maxWidth: '500px',
+          textAlign: 'center',
+          backdropFilter: 'blur(10px)',
+          position: 'relative',
+          overflow: 'hidden'
+        }}>
+          {/* Animated background elements */}
+          <div style={{
+            position: 'absolute',
+            top: '-50%',
+            left: '-50%',
+            width: '200%',
+            height: '200%',
+            background: 'radial-gradient(circle, rgba(183, 155, 255, 0.1) 0%, transparent 70%)',
+            animation: 'pulse 3s ease-in-out infinite'
+          }}></div>
+          
+          <div style={{
+            position: 'absolute',
+            top: '20%',
+            right: '10%',
+            width: '60px',
+            height: '60px',
+            background: 'rgba(183, 155, 255, 0.2)',
+            borderRadius: '50%',
+            animation: 'float 4s ease-in-out infinite'
+          }}></div>
+          
+          <div style={{
+            position: 'absolute',
+            bottom: '30%',
+            left: '15%',
+            width: '40px',
+            height: '40px',
+            background: 'rgba(97, 161, 255, 0.2)',
+            borderRadius: '50%',
+            animation: 'float 5s ease-in-out infinite reverse'
+          }}></div>
+          
+          <div style={{
+            fontSize: '4rem',
+            marginBottom: '1rem',
+            animation: 'bounce 2s ease-in-out infinite'
+          }}>💰</div>
+          
+          <h3 style={{
+            color: '#B79BFF',
+            fontSize: '1.5rem',
+            marginBottom: '1rem',
+            fontWeight: '600'
+          }}>What would change?</h3>
+          
+          <p style={{
+            color: '#E0E0E0',
+            fontSize: '1.1rem',
+            lineHeight: '1.6',
+            marginBottom: '0'
+          }}>
+            Think about how this windfall could transform<br/>
+            different areas of your life...
+          </p>
         </div>
         <button type="submit" className="btn btn-primary-active">
           Got it

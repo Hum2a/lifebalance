@@ -539,6 +539,25 @@
   .tutorial-instructions-sub-text {
     font-size: 0.75rem;
   }
+  
+  /* Mobile tutorial visual adjustments */
+  .tutorial-visual {
+    padding: 1.5rem !important;
+    margin: 1.5rem auto !important;
+    border-radius: 16px !important;
+  }
+  
+  .tutorial-visual h3 {
+    font-size: 1.25rem !important;
+  }
+  
+  .tutorial-visual p {
+    font-size: 1rem !important;
+  }
+  
+  .tutorial-visual div[style*="font-size: 4rem"] {
+    font-size: 3rem !important;
+  }
 }
 
 @media (min-width: 769px) {
@@ -616,6 +635,25 @@
   
   .tutorial-instructions-sub-text {
     font-size: 1rem;
+  }
+  
+  /* Desktop tutorial visual enhancements */
+  .tutorial-visual {
+    padding: 2.5rem !important;
+    margin: 2.5rem auto !important;
+    border-radius: 24px !important;
+  }
+  
+  .tutorial-visual h3 {
+    font-size: 1.75rem !important;
+  }
+  
+  .tutorial-visual p {
+    font-size: 1.25rem !important;
+  }
+  
+  .tutorial-visual div[style*="font-size: 4rem"] {
+    font-size: 5rem !important;
   }
 }
 
@@ -828,5 +866,38 @@
   }
   100% {
     transform: translateX(100%);
+  }
+}
+
+/* Tutorial page animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
   }
 }
