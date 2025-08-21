@@ -5,6 +5,22 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(70.76% 70.76% at 44.55% 9.17%, #21203D 0%, #13112F 31.23%, #110F29 41.06%, #0D0C20 59.28%, #000000 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: white;
+}
+
+html {
+  background: radial-gradient(70.76% 70.76% at 44.55% 9.17%, #21203D 0%, #13112F 31.23%, #110F29 41.06%, #0D0C20 59.28%, #000000 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+#root {
+  background: radial-gradient(70.76% 70.76% at 44.55% 9.17%, #21203D 0%, #13112F 31.23%, #110F29 41.06%, #0D0C20 59.28%, #000000 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
 code {

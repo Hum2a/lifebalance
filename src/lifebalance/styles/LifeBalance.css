@@ -22,8 +22,20 @@
 }
 
 @media (max-width: 768px) {
+  .lifebalance-container {
+    padding-top: 1rem;
+  }
+  
+  .lifebalance-content {
+    padding: 0.75rem;
+    margin: 0;
+  }
+}
+
+@media (min-width: 769px) {
   .lifebalance-content {
     padding: 2rem;
     margin: 1rem;
+    max-width: 600px;
   }
 } 

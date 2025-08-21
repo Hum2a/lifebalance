@@ -5,10 +5,9 @@
 }
 
 .welcome-title {
-  font-size: 2.8rem;
-  font-weight: 700;
   color: #97A1FF;
   font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
   font-size: 32px;
   line-height: 100%;
   letter-spacing: 0.02em;
@@ -39,7 +38,6 @@
 
 .welcome-description .highlight-text {
   color: #97A1FF;
-  ;
 }
 
 .welcome-section-container {
@@ -124,7 +122,7 @@
 }
 
 .journey-title {
-  font-size: 2.5rem;
+  font-size: 32px;
   font-weight: 700;
   color: #97A1FF;
   font-family: 'Urbanist', sans-serif;
@@ -163,20 +161,90 @@
 }
 
 @media (max-width: 768px) {
+  .welcome-page {
+    padding: 1.5rem;
+  }
+  
   .welcome-title {
-    font-size: 2rem;
+    font-size: 24px;
+    margin-bottom: 1rem;
   }
-
+  
   .welcome-description {
-    font-size: 1.1rem;
+    font-size: 16px;
+    line-height: 24px;
   }
-
+  
+  .welcome-section-container {
+    gap: 1rem;
+  }
+  
   .welcome-section {
     padding: 1.2rem;
   }
-
+  
+  .welcome-section h2 {
+    font-size: 18px;
+  }
+  
+  .welcome-section p {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  
+  .journey-title {
+    font-size: 24px;
+  }
+  
+  .journey-description {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  
   .welcome-button {
     padding: 0.8rem 2.5rem;
     font-size: 1.1rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .welcome-page {
+    padding: 2.5rem;
+  }
+  
+  .welcome-title {
+    font-size: 36px;
+    margin-bottom: 2rem;
+  }
+  
+  .welcome-description {
+    font-size: 22px;
+    line-height: 36px;
+  }
+  
+  .welcome-section-container {
+    gap: 2rem;
+  }
+  
+  .welcome-section {
+    padding: 2rem;
+  }
+  
+  .welcome-section h2 {
+    font-size: 26px;
+  }
+  
+  .welcome-section p {
+    font-size: 22px;
+    line-height: 36px;
+  }
+  
+  .journey-title {
+    font-size: 36px;
+  }
+  
+  .journey-description {
+    font-size: 26px;
+    line-height: 36px;
   }
 } 

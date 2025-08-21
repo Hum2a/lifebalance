@@ -62,6 +62,13 @@ const Page2 = ({ onSubmit, onStepChange }) => {
     e.preventDefault();
     if (revealed < LIFE_AREAS.length) {
       setRevealed(revealed + 1);
+      // Smooth scroll to bottom after revealing new card
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 100); // Small delay to ensure the new card is rendered
     } else {
       if (onSubmit) onSubmit(scores);
     }
@@ -77,12 +84,12 @@ const Page2 = ({ onSubmit, onStepChange }) => {
       <div className="page2-cards-wrapper" style={{minHeight: '340px', position: 'relative'}}>
         {LIFE_AREAS.slice(0, revealed).map((area, idx) => {
           const colorClass = idx % 3 === 0 ? 'card-dark' : idx % 3 === 1 ? 'card-green' : 'card-pink';
+          const isNewlyRevealed = idx === revealed - 1; // Check if this card was just revealed
           return (
-            <div key={area.label} className={`page2-card ${colorClass}`} style={{
-              opacity: 1,
-              transform: 'translateY(0)',
-              transition: 'all 0.4s ease'
-            }}>
+            <div 
+              key={area.label} 
+              className={`page2-card ${colorClass} ${isNewlyRevealed ? 'newly-revealed' : ''}`}
+            >
               <div className="page2-card-label">{area.label}</div>
               <div className="page2-card-prompt">{area.prompt}</div>
               <div className="page2-slider-row">
