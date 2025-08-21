@@ -4,40 +4,164 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <meta name="theme-color" content="#B79BFF" />
+    <meta name="color-scheme" content="dark" />
+    
+    <!-- Primary Meta Tags -->
+    <title>LifeBalance - Transform Your Life with Smart Goal Setting</title>
+    <meta name="title" content="LifeBalance - Transform Your Life with Smart Goal Setting" />
+    <meta name="description" content="Discover your life priorities and set meaningful goals with our intelligent assessment tool. Balance money, time, and purpose to create the life you truly want." />
+    <meta name="keywords" content="life balance, goal setting, personal development, life assessment, productivity, wellness, time management, financial planning" />
+    <meta name="author" content="LifeBalance" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lifebalance.app/" />
+    <meta property="og:title" content="LifeBalance - Transform Your Life with Smart Goal Setting" />
+    <meta property="og:description" content="Discover your life priorities and set meaningful goals with our intelligent assessment tool. Balance money, time, and purpose to create the life you truly want." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    <meta property="og:site_name" content="LifeBalance" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://lifebalance.app/" />
+    <meta property="twitter:title" content="LifeBalance - Transform Your Life with Smart Goal Setting" />
+    <meta property="twitter:description" content="Discover your life priorities and set meaningful goals with our intelligent assessment tool. Balance money, time, and purpose to create the life you truly want." />
+    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Additional Meta Tags -->
+    <meta name="application-name" content="LifeBalance" />
+    <meta name="apple-mobile-web-app-title" content="LifeBalance" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-TileColor" content="#B79BFF" />
+    <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml" />
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "LifeBalance",
+      "description": "An intelligent life assessment and goal-setting tool that helps users balance money, time, and purpose to create meaningful life goals.",
+      "url": "https://lifebalance.app/",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "LifeBalance"
+      }
+    }
+    </script>
+    
+    <!-- Performance and Security -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <!-- PWA Support -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="msapplication-TileImage" content="%PUBLIC_URL%/mstile-144x144.png" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="%PUBLIC_URL%/static/css/main.css" as="style" />
+    <link rel="preload" href="%PUBLIC_URL%/static/js/main.js" as="script" />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <div style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        text-align: center;
+        padding: 2rem;
+      ">
+        <div>
+          <h1 style="color: #B79BFF; margin-bottom: 1rem;">LifeBalance</h1>
+          <p>You need to enable JavaScript to use this application.</p>
+          <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 1rem;">
+            Please enable JavaScript in your browser settings and refresh the page.
+          </p>
+        </div>
+      </div>
+    </noscript>
+    
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    
+    <!-- Loading State -->
+    <div id="loading" style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    ">
+      <div>
+        <div style="
+          width: 60px;
+          height: 60px;
+          border: 3px solid rgba(183, 155, 255, 0.3);
+          border-top: 3px solid #B79BFF;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+          margin: 0 auto 1rem auto;
+        "></div>
+        <h1 style="color: #B79BFF; margin-bottom: 0.5rem;">LifeBalance</h1>
+        <p>Loading your life transformation journey...</p>
+      </div>
+    </div>
+    
+    <style>
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      #loading {
+        transition: opacity 0.3s ease-out;
+      }
+      
+      .loaded #loading {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
+    
+    <script>
+      // Hide loading screen when app is ready
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.body.classList.add('loaded');
+        }, 500);
+      });
+    </script>
   </body>
 </html>
