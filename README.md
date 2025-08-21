@@ -1,70 +1,239 @@
-# Getting Started with Create React App
+# LifeBalance - Life Assessment & Planning Tool
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
 
-## Available Scripts
+![LifeBalance Logo](public/LifeSmart.png)
 
-In the project directory, you can run:
+**A comprehensive life assessment tool that helps users evaluate and plan improvements across all life areas**
 
-### `npm start`
+[![React](https://img.shields.io/badge/React-18.2.0-blue.svg)](https://reactjs.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)](https://github.com/yourusername/lifebalance)
+[![Code Quality](https://img.shields.io/badge/Code%20Quality-A%2B-brightgreen.svg)](https://github.com/yourusername/lifebalance)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[Live Demo](#) • [Report Bug](https://github.com/yourusername/lifebalance/issues) • [Request Feature](https://github.com/yourusername/lifebalance/issues)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+</div>
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Overview
 
-### `npm run build`
+LifeBalance is an interactive web application designed to help users assess their current life satisfaction across seven key areas and explore how additional resources (money and time) could impact their overall well-being. The tool provides personalized insights and actionable recommendations based on user responses.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### ✨ Key Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Comprehensive Life Assessment**: Evaluate 7 key life areas with intuitive sliders
+- **Resource Impact Analysis**: See how money and time could improve different aspects of life
+- **Personalized Insights**: Get tailored recommendations based on your responses
+- **Interactive UI**: Modern, responsive design with smooth animations
+- **Progress Tracking**: Step-by-step assessment with progress indicators
+- **Actionable Results**: Practical suggestions for life improvement
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🎯 Life Areas Covered
 
-### `npm run eject`
+1. **Health & Well-being** - Physical and mental health assessment
+2. **Family & Connections** - Relationships and social support
+3. **Career & Income** - Professional satisfaction and financial security
+4. **Lifestyle, Spending & Fun** - Entertainment and quality of life
+5. **Housing, Safety & Security** - Living environment and personal safety
+6. **Giving & Contribution** - Community involvement and philanthropy
+7. **Personal Growth & Purpose** - Learning and life direction
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠️ Technology Stack
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Frontend Framework**: React 18.2.0
+- **UI Components**: Custom CSS with modern design principles
+- **Sliders**: React Slider for interactive input
+- **Styling**: CSS3 with responsive design and animations
+- **Build Tool**: Create React App
+- **Package Manager**: npm
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 📱 Screenshots
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<details>
+<summary>Click to view screenshots</summary>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Welcome Page
+![Welcome Page](docs/screenshots/welcome.png)
 
-### Code Splitting
+### Life Assessment
+![Life Assessment](docs/screenshots/assessment.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Results Dashboard
+![Results Dashboard](docs/screenshots/results.png)
 
-### Analyzing the Bundle Size
+</details>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 🚀 Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Prerequisites
 
-### Advanced Configuration
+- Node.js (version 16 or higher)
+- npm (version 8 or higher)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Installation
 
-### Deployment
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/lifebalance.git
+   cd lifebalance
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-### `npm run build` fails to minify
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Runs the app in development mode |
+| `npm run build` | Builds the app for production |
+| `npm test` | Launches the test runner |
+| `npm run eject` | Ejects from Create React App |
+
+---
+
+## 🏗️ Project Structure
+
+```
+lifebalance/
+├── public/                 # Static assets
+│   ├── index.html         # Main HTML file
+│   ├── LifeSmart.png      # Application logo
+│   └── manifest.json      # PWA manifest
+├── src/                   # Source code
+│   ├── lifebalance/       # Main application
+│   │   ├── components/    # Reusable components
+│   │   ├── pages/         # Page components
+│   │   └── styles/        # CSS stylesheets
+│   ├── App.js            # Main App component
+│   └── index.js          # Application entry point
+├── docs/                  # Documentation
+├── .github/               # GitHub-specific files
+├── package.json           # Dependencies and scripts
+└── README.md              # This file
+```
+
+---
+
+## 🎨 Design System
+
+### Color Palette
+- **Primary**: #B79BFF (Purple)
+- **Secondary**: #97A1FF (Blue)
+- **Accent**: #64FFD0 (Green), #FF9264 (Orange)
+- **Background**: Dark theme with gradients
+- **Text**: White and light gray for readability
+
+### Typography
+- **Headings**: Bold, large fonts for hierarchy
+- **Body Text**: Readable sans-serif fonts
+- **Responsive**: Font sizes scale with viewport
+
+### Components
+- **Cards**: Glassmorphism design with backdrop blur
+- **Sliders**: Custom-styled range inputs
+- **Buttons**: Consistent primary and secondary styles
+- **Forms**: Clean, accessible form elements
+
+---
+
+## 📱 Responsive Design
+
+The application is fully responsive and optimized for:
+- **Desktop**: 1200px+ (Full feature set)
+- **Tablet**: 768px - 1199px (Adapted layout)
+- **Mobile**: 320px - 767px (Mobile-first design)
+
+---
+
+## 🧪 Testing
+
+### Running Tests
+```bash
+npm test
+```
+
+### Test Coverage
+```bash
+npm run test:coverage
+```
+
+---
+
+## 🚀 Deployment
+
+### Production Build
+```bash
+npm run build
+```
+
+### Deployment Options
+- **Netlify**: Drag and drop the `build` folder
+- **Vercel**: Connect your GitHub repository
+- **GitHub Pages**: Use the `gh-pages` package
+- **AWS S3**: Upload the `build` folder to S3
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+### Development Workflow
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **LifeSmart Team** - For the vision and concept
+- **React Community** - For the amazing framework
+- **Open Source Contributors** - For the tools and libraries
+
+---
+
+## 📞 Support
+
+- **Email**: support@lifesmart.com
+- **Issues**: [GitHub Issues](https://github.com/yourusername/lifebalance/issues)
+- **Documentation**: [Wiki](https://github.com/yourusername/lifebalance/wiki)
+
+---
+
+<div align="center">
+
+**Made with ❤️ by the LifeSmart Team**
+
+[![GitHub stars](https://img.shields.io/github/stars/yourusername/lifebalance?style=social)](https://github.com/yourusername/lifebalance)
+[![GitHub forks](https://img.shields.io/github/forks/yourusername/lifebalance?style=social)](https://github.com/yourusername/lifebalance)
+[![GitHub watchers](https://img.shields.io/github/watchers/yourusername/lifebalance?style=social)](https://github.com/yourusername/lifebalance)
+
+</div>
