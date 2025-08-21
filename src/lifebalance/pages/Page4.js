@@ -57,6 +57,13 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
     }
     if (revealed < LIFE_AREAS.length) {
       setRevealed(revealed + 1);
+      // Smooth scroll to bottom after revealing new card
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 100); // Small delay to ensure the new card is rendered
     } else {
       if (onFinish) onFinish(newScores);
     }

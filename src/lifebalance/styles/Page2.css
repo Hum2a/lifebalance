@@ -540,7 +540,15 @@
 
   /* Special animation for newly revealed cards */
   .page2-card.newly-revealed {
-    animation: newlyRevealedCard 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    animation: newlyRevealedCard 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    animation-delay: 0s !important;
+  }
+
+  /* Ensure existing cards don't re-animate */
+  .page2-card:not(.newly-revealed) {
+    animation: none;
+    opacity: 1;
+    transform: translateY(0);
   }
 
   @keyframes newlyRevealedCard {

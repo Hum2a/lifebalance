@@ -47,10 +47,21 @@ const CARD_COLORS = [
 const Page2 = ({ onSubmit, onStepChange }) => {
   const [scores, setScores] = useState(Array(LIFE_AREAS.length).fill(5));
   const [revealed, setRevealed] = useState(1);
+  const [newlyRevealedCard, setNewlyRevealedCard] = useState(null);
 
   React.useEffect(() => {
     if (onStepChange) onStepChange(revealed);
   }, [revealed, onStepChange]);
+
+  // Clear the newly revealed card after animation completes
+  React.useEffect(() => {
+    if (newlyRevealedCard !== null) {
+      const timer = setTimeout(() => {
+        setNewlyRevealedCard(null);
+      }, 800); // Match the animation duration (0.8s)
+      return () => clearTimeout(timer);
+    }
+  }, [newlyRevealedCard]);
 
   const handleSliderChange = (idx, value) => {
     const newScores = [...scores];
@@ -61,7 +72,10 @@ const Page2 = ({ onSubmit, onStepChange }) => {
   const handleNext = (e) => {
     e.preventDefault();
     if (revealed < LIFE_AREAS.length) {
-      setRevealed(revealed + 1);
+      const nextRevealed = revealed + 1;
+      setRevealed(nextRevealed);
+      // Set the newly revealed card index
+      setNewlyRevealedCard(nextRevealed - 1);
       // Smooth scroll to bottom after revealing new card
       setTimeout(() => {
         window.scrollTo({
@@ -84,7 +98,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
       <div className="page2-cards-wrapper" style={{minHeight: '340px', position: 'relative'}}>
         {LIFE_AREAS.slice(0, revealed).map((area, idx) => {
           const colorClass = idx % 3 === 0 ? 'card-dark' : idx % 3 === 1 ? 'card-green' : 'card-pink';
-          const isNewlyRevealed = idx === revealed - 1; // Check if this card was just revealed
+          const isNewlyRevealed = idx === newlyRevealedCard; // Use the tracked newly revealed card
           return (
             <div 
               key={area.label} 
