@@ -15,7 +15,7 @@
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
   background-color: transparent;
   padding: 0;
   border-radius: 0;
@@ -23,10 +23,9 @@
 }
 
 .logo-icon {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 3.5rem;
+  height: 3.5rem;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 .logo-text {
@@ -59,12 +58,8 @@
   }
   
   .logo-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  
-  .logo-text {
-    font-size: 1rem;
+    width: 6.8rem;
+    height: 3.8rem;
   }
   
   .question-progress {
@@ -81,12 +76,8 @@
   }
   
   .logo-icon {
-    width: 2rem;
-    height: 2rem;
-  }
-  
-  .logo-text {
-    font-size: 1.4rem;
+    width: 5rem;
+    height: 5rem;
   }
   
   .question-progress {
