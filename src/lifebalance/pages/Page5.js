@@ -21,14 +21,56 @@ const TIME_ACTIONS = [
   { area: 'Growth & Purpose', action: 'Book a regular "learning hour" each week for reading, journaling or an online course to keep purpose front-of-mind.' },
 ];
 
+// Fallback actions for when no specific time action is found
+const getFallbackTimeAction = (averages, biggestTime) => {
+  // If the user's current score is already high (8+), they're doing well
+  if (averages.now >= 8) {
+    return 'You\'re already doing great! Consider this a reminder to maintain your current time management habits and maybe share your wisdom with others who could benefit from your approach.';
+  }
+  
+  // If the biggest time jump is small (less than 2 points), they're relatively balanced
+  if (biggestTime.value < 2) {
+    return 'Your life areas are quite balanced! Focus on maintaining this equilibrium rather than making big changes. Small, consistent improvements in any area will compound over time.';
+  }
+  
+  // If their current score is moderate (6-7), suggest general time optimization
+  if (averages.now >= 6) {
+    return 'You\'re on the right track! Look for small pockets of time in your day (commute, waiting rooms, meal prep) to invest in activities that align with your values and goals.';
+  }
+  
+  // Default fallback for lower scores
+  return 'Start with small, manageable time commitments. Even 15 minutes daily in areas that matter to you can create meaningful change over time. Remember, consistency beats intensity.';
+};
+
+// Fallback actions for when no specific money action is found
+const getFallbackMoneyAction = (averages, biggestMoney) => {
+  // If the user's current score is already high (8+), they're doing well
+  if (averages.now >= 8) {
+    return 'You\'re already in a great financial position! Consider this a reminder to maintain your current spending habits and maybe help others develop similar financial discipline.';
+  }
+  
+  // If the biggest money jump is small (less than 2 points), they're relatively balanced
+  if (biggestMoney.value < 2) {
+    return 'Your financial priorities are quite balanced! Focus on maintaining this equilibrium rather than making big changes. Small, consistent financial habits will compound over time.';
+  }
+  
+  // If their current score is moderate (6-7), suggest general financial optimization
+  if (averages.now >= 6) {
+    return 'You\'re on the right track! Look for small ways to optimize your spending and saving. Even small adjustments to daily habits can create meaningful financial change over time.';
+  }
+  
+  // Default fallback for lower scores
+  return 'Start with small, manageable financial commitments. Even setting aside a small amount regularly can create meaningful change over time. Remember, consistency beats intensity.';
+};
+
 const Page5 = ({
   averages = { now: 6.1, money: 7.8, time: 7.3 },
   biggestMoney = { area: 'Health & Wellbeing', value: 3.0 },
   biggestTime = { area: 'Health & Wellbeing', value: 2.5 },
 }) => {
   // Find the recommended action for the biggest jump area
-  const moneyAction = MONEY_ACTIONS.find(a => a.area === biggestMoney.area)?.action || '';
-  const timeAction = TIME_ACTIONS.find(a => a.area === biggestTime.area)?.action || '';
+  const moneyAction = MONEY_ACTIONS.find(a => a.area === biggestMoney.area)?.action || getFallbackMoneyAction(averages, biggestMoney);
+  const timeAction = TIME_ACTIONS.find(a => a.area === biggestTime.area)?.action || getFallbackTimeAction(averages, biggestTime);
 
   return (
     <div className="page5-container custom-layout">
