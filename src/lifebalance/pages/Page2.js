@@ -1,36 +1,56 @@
 import React, { useState } from 'react';
 import ReactSlider from 'react-slider';
+import { 
+  MdHealthAndSafety, 
+  MdFamilyRestroom, 
+  MdWork, 
+  MdCelebration, 
+  MdHome, 
+  MdVolunteerActivism, 
+  MdSchool,
+  MdCheckCircle,
+  MdTrendingUp,
+  MdPsychology,
+  MdStar
+} from 'react-icons/md';
 import '../styles/Page2.css';
 import '../styles/buttons.css';
 
 const LIFE_AREAS = [
   {
     label: 'Health & Well-being',
-    prompt: 'How am I doing mentally and physically?'
+    prompt: 'How am I doing mentally and physically?',
+    icon: MdHealthAndSafety
   },
   {
     label: 'Family & Connections',
-    prompt: 'Do I have people I rely on and who rely on me?'
+    prompt: 'Do I have people I rely on and who rely on me?',
+    icon: MdFamilyRestroom
   },
   {
     label: 'Career & Income',
-    prompt: 'Do I earn enough for the life I want, in a career that feels right?'
+    prompt: 'Do I earn enough for the life I want, in a career that feels right?',
+    icon: MdWork
   },
   {
     label: 'Lifestyle, Spending & Fun',
-    prompt: 'Do I spend intentionally on joy, or just impulse?'
+    prompt: 'Do I spend intentionally on joy, or just impulse?',
+    icon: MdCelebration
   },
   {
     label: 'Housing, Safety & Security',
-    prompt: 'Does my living situation support or stress me?'
+    prompt: 'Does my living situation support or stress me?',
+    icon: MdHome
   },
   {
     label: 'Giving & Contribution',
-    prompt: 'Do I give time or money to causes I care about?'
+    prompt: 'Do I give time or money to causes I care about?',
+    icon: MdVolunteerActivism
   },
   {
     label: 'Personal Growth & Purpose',
-    prompt: 'Am I learning and moving toward my purpose?'
+    prompt: 'Am I learning and moving toward my purpose?',
+    icon: MdSchool
   }
 ];
 
@@ -150,12 +170,16 @@ const Page2 = ({ onSubmit, onStepChange }) => {
         {LIFE_AREAS.slice(0, revealed).map((area, idx) => {
           const colorClass = idx % 3 === 0 ? 'card-dark' : idx % 3 === 1 ? 'card-green' : 'card-pink';
           const isNewlyRevealed = idx === newlyRevealedCard; // Use the tracked newly revealed card
+          const IconComponent = area.icon;
           return (
             <div 
               key={area.label} 
               className={`page2-card ${colorClass} ${isNewlyRevealed ? 'newly-revealed' : ''}`}
             >
-              <div className="page2-card-label">{area.label}</div>
+              <div className="page2-card-label">
+                <IconComponent style={{ marginRight: '10px', verticalAlign: 'middle' }} />
+                {area.label}
+              </div>
               <div className="page2-card-prompt">{area.prompt}</div>
               <div className="page2-slider-row">
                 <div style={{position: 'relative', width: '100%', height: '44px'}}>
@@ -194,6 +218,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
           className="btn btn-primary-active page2-complete-btn"
           onClick={() => onSubmit && onSubmit(scores)}
         >
+          <MdCheckCircle style={{ marginRight: '8px', verticalAlign: 'middle' }} />
           Complete Assessment
         </button>
       )}
@@ -202,6 +227,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
       </button> */}
       {revealed === 1 && (
         <div className="page2-remember">
+          <MdStar style={{ marginRight: '8px', verticalAlign: 'middle', color: '#B79BFF' }} />
           <b>Remember</b><br/>
           Let the question under each heading guide your reflection<br/>
           <span className="page2-desc-em">There are no right answers here.</span>

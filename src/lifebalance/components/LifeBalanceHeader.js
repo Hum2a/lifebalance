@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdAssessment } from 'react-icons/md';
 import '../styles/LifeBalanceHeader.css';
 
 const LifeBalanceHeader = ({ currentStep, totalSteps }) => {
@@ -9,6 +10,7 @@ const LifeBalanceHeader = ({ currentStep, totalSteps }) => {
       </div>
       {currentStep && totalSteps && (
         <div className="question-progress">
+          <MdAssessment style={{ marginRight: '8px', verticalAlign: 'middle' }} />
           Q {currentStep}/{totalSteps}
         </div>
       )}

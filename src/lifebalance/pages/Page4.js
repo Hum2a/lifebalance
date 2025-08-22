@@ -1,36 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import ReactSlider from 'react-slider';
+import { 
+  MdHealthAndSafety, 
+  MdFamilyRestroom, 
+  MdWork, 
+  MdCelebration, 
+  MdHome, 
+  MdVolunteerActivism, 
+  MdSchool,
+  MdCheckCircle,
+  MdTrendingUp,
+  MdPsychology,
+  MdStar,
+  MdAccessTime,
+  MdSchedule,
+  MdLightbulb,
+  MdEmojiEvents
+} from 'react-icons/md';
 import '../styles/Page3.css'; // Reusing styles from Page 3
 import '../styles/buttons.css';
 
 const LIFE_AREAS = [
   {
     label: 'Health & Well-being',
-    prompt: 'More rest, exercise, meal prep or routine to boost energy?'
+    prompt: 'More rest, exercise, meal prep or routine to boost energy?',
+    icon: MdHealthAndSafety
   },
   {
     label: 'Family & Connections',
-    prompt: 'Could deeper, unhurried time strengthen key relationships?'
+    prompt: 'Could deeper, unhurried time strengthen key relationships?',
+    icon: MdFamilyRestroom
   },
   {
     label: 'Career & Income',
-    prompt: 'Would extra hours let you pursue training or a passion project?'
+    prompt: 'Would extra hours let you pursue training or a passion project?',
+    icon: MdWork
   },
   {
     label: 'Lifestyle, Spending & Fun',
-    prompt: 'If you had more free time, would you feel richer experiences?'
+    prompt: 'If you had more free time, would you feel richer experiences?',
+    icon: MdCelebration
   },
   {
     label: 'Housing, Safety & Security',
-    prompt: 'With time to organise, maintain or move, would you feel safer?'
+    prompt: 'With time to organise, maintain or move, would you feel safer?',
+    icon: MdHome
   },
   {
     label: 'Giving & Contribution',
-    prompt: 'How much more impact could extra volunteer hours create?'
+    prompt: 'How much more impact could extra volunteer hours create?',
+    icon: MdVolunteerActivism
   },
   {
     label: 'Growth & Purpose',
-    prompt: 'Could quiet blocks for reading or reflection fuel personal growth?'
+    prompt: 'Could quiet blocks for reading or reflection fuel personal growth?',
+    icon: MdSchool
   }
 ];
 
@@ -177,7 +201,9 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
             fontSize: '4rem',
             marginBottom: '1rem',
             animation: 'bounce 2s ease-in-out infinite'
-          }}>⏰</div>
+          }}>
+            <MdAccessTime style={{ fontSize: '4rem', color: '#FF9264' }} />
+          </div>
           
           <h3 style={{
             color: '#B79BFF',
@@ -216,13 +242,17 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
       <div className="page2-cards-wrapper" style={{position: 'relative'}}>
         {LIFE_AREAS.slice(0, revealed).map((area, idx) => {
           const colorClass = idx % 3 === 0 ? 'card-dark' : idx % 3 === 1 ? 'card-green' : 'card-pink';
+          const IconComponent = area.icon;
           return (
             <div key={area.label} className={`page2-card ${colorClass}`} style={{
               opacity: 1,
               transform: 'translateY(0)',
               transition: 'all 0.4s ease'
             }}>
-              <div className="page2-card-label">{area.label}</div>
+              <div className="page2-card-label">
+                <IconComponent style={{ marginRight: '10px', verticalAlign: 'middle' }} />
+                {area.label}
+              </div>
               <div className="page2-card-prompt">{area.prompt}</div>
               <div className="page3-prev-label">Previous Selection</div>
               <div className="page2-slider-row">
@@ -287,6 +317,7 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
           className="btn btn-primary-active page2-complete-btn"
           onClick={() => onFinish && onFinish(newScores)}
         >
+          <MdCheckCircle style={{ marginRight: '8px', verticalAlign: 'middle' }} />
           Complete Assessment
         </button>
       )}
@@ -296,6 +327,7 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
       {/* Show the Remember box only for the first question */}
       {revealed === 1 && (
         <div className="page2-remember">
+          <MdStar style={{ marginRight: '8px', verticalAlign: 'middle', color: '#B79BFF' }} />
           <b>Remember</b><br/>
           Let the question under each heading guide your reflection<br/>
           <span className="page2-desc-em">There are no right answers here.</span>

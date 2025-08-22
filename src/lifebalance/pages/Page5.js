@@ -1,6 +1,17 @@
 import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { 
+  MdDownload, 
+  MdPictureAsPdf, 
+  MdBugReport,
+  MdAssessment,
+  MdTrendingUp,
+  MdAccessTime,
+  MdAttachMoney,
+  MdLightbulb,
+  MdSave
+} from 'react-icons/md';
 import '../styles/Page5.css';
 
 const MONEY_ACTIONS = [
@@ -274,15 +285,24 @@ const Page5 = ({
       {/* Three-column average score box */}
       <div className="snapshot-averages-row">
         <div className="snapshot-average-col">
-          <div className="snapshot-average-label">Now</div>
+          <div className="snapshot-average-label">
+            <MdAssessment style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+            Now
+          </div>
           <div className="snapshot-average-value">{averages.now}/10</div>
         </div>
         <div className="snapshot-average-col">
-          <div className="snapshot-average-label">with $$$</div>
+          <div className="snapshot-average-label">
+            <MdAttachMoney style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+            with $$$
+          </div>
           <div className="snapshot-average-value">{averages.money}/10</div>
         </div>
         <div className="snapshot-average-col">
-          <div className="snapshot-average-label">with Time</div>
+          <div className="snapshot-average-label">
+            <MdAccessTime style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+            with Time
+          </div>
           <div className="snapshot-average-value">{averages.time}/10</div>
         </div>
       </div>
@@ -290,31 +310,51 @@ const Page5 = ({
       {/* Two horizontally aligned jump boxes */}
       <div className="snapshot-jumps-row">
         <div className="snapshot-jump-box">
-          <div className="snapshot-jump-label">Biggest jump with <span className="money-accent">money</span></div>
+          <div className="snapshot-jump-label">
+            <MdTrendingUp style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+            Biggest jump with <span className="money-accent">money</span>
+          </div>
           <div className="snapshot-jump-area">{biggestMoney.area}</div>
         </div>
         <div className="snapshot-jump-box">
-          <div className="snapshot-jump-label">Biggest jump with <span className="time-accent">time</span></div>
+          <div className="snapshot-jump-label">
+            <MdTrendingUp style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+            Biggest jump with <span className="time-accent">time</span>
+          </div>
           <div className="snapshot-jump-area">{biggestTime.area}</div>
         </div>
       </div>
 
       {/* What can you do now? section */}
       <div className="snapshot-section-divider">
-        <span className="snapshot-section-title">What can you do now?</span>
+        <span className="snapshot-section-title">
+          <MdLightbulb style={{ marginRight: '10px', verticalAlign: 'middle' }} />
+          What can you do now?
+        </span>
       </div>
       <div className="snapshot-actions-row">
         <div className="snapshot-action-card">
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <MdAttachMoney style={{ marginRight: '8px', color: '#64FFD0' }} />
+            <strong>Money Action:</strong>
+          </div>
           {moneyAction}
         </div>
         <div className="snapshot-action-card">
+          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <MdAccessTime style={{ marginRight: '8px', color: '#FF9264' }} />
+            <strong>Time Action:</strong>
+          </div>
           {timeAction}
         </div>
       </div>
 
       {/* Key Takeaway section */}
       <div className="snapshot-section-divider">
-        <span className="snapshot-section-title">Key Takeaway</span>
+        <span className="snapshot-section-title">
+          <MdAssessment style={{ marginRight: '10px', verticalAlign: 'middle' }} />
+          Key Takeaway
+        </span>
       </div>
       <div className="snapshot-key-takeaway">
         Money is only a tool – its real power is the freedom and security it can buy. Yet time is a resource you can never earn back. This exercise shows where extra cash or extra hours would truly change your life, so you can aim for independence and contentment instead of simply chasing more money at the cost of other things.
@@ -322,26 +362,29 @@ const Page5 = ({
 
       {/* Download/Export Section */}
       <div className="snapshot-section-divider">
-        <span className="snapshot-section-title">Save Your Snapshot</span>
+        <span className="snapshot-section-title">
+          <MdSave style={{ marginRight: '10px', verticalAlign: 'middle' }} />
+          Save Your Snapshot
+        </span>
       </div>
       <div className="snapshot-download-row">
         <button 
           className="snapshot-download-btn snapshot-download-image"
           onClick={downloadAsImage}
         >
-          📱 Download as Image
+          <MdDownload /> Download as Image
         </button>
         <button 
           className="snapshot-download-btn snapshot-download-pdf"
           onClick={downloadAsPDF}
         >
-          📄 Download as PDF
+          <MdPictureAsPdf /> Download as PDF
         </button>
         <button 
           className="snapshot-download-btn snapshot-download-debug"
           onClick={debugExport}
         >
-          🐛 Debug Export
+          <MdBugReport /> Debug Export
         </button>
       </div>
     </div>

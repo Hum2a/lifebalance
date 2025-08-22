@@ -1,5 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import ReactSlider from 'react-slider';
+import { 
+  MdHealthAndSafety, 
+  MdFamilyRestroom, 
+  MdWork, 
+  MdCelebration, 
+  MdHome, 
+  MdVolunteerActivism, 
+  MdCheckCircle,
+  MdTrendingUp,
+  MdPsychology,
+  MdStar,
+  MdAttachMoney,
+  MdAccountBalance,
+  MdSavings,
+  MdShoppingCart,
+  MdLightbulb,
+  MdEmojiEvents,
+  MdSchool
+} from 'react-icons/md';
 import '../styles/Page3.css';
 import '../styles/buttons.css';
 
@@ -10,31 +29,38 @@ const TUTORIAL_SLIDE = {
 const LIFE_AREAS = [
   {
     label: 'Health & Well-being',
-    prompt: 'Better nutrition, gym/therapy, medical checks, or more harmful activities?'
+    prompt: 'Better nutrition, gym/therapy, medical checks, or more harmful activities?',
+    icon: MdHealthAndSafety
   },
   {
     label: 'Family & Connections',
-    prompt: 'Fun visits, shared trips, thoughtful gifts or higher expectations?'
+    prompt: 'Fun visits, shared trips, thoughtful gifts or higher expectations?',
+    icon: MdFamilyRestroom
   },
   {
     label: 'Career & Income',
-    prompt: 'More likely to move towards the right career for you?'
+    prompt: 'More likely to move towards the right career for you?',
+    icon: MdWork
   },
   {
     label: 'Lifestyle, Spending & Fun',
-    prompt: 'Budget for meaningful hobbies & travel, or just more spending?'
+    prompt: 'Budget for meaningful hobbies & travel, or just more spending?',
+    icon: MdCelebration
   },
   {
     label: 'Housing, Safety & Security',
-    prompt: 'Ability to build emergency fund, clear debt, improve home safety?'
+    prompt: 'Ability to build emergency fund, clear debt, improve home safety?',
+    icon: MdHome
   },
   {
     label: 'Giving & Contribution',
-    prompt: 'Would your giving increase either in money, time or impact?'
+    prompt: 'Would your giving increase either in money, time or impact?',
+    icon: MdVolunteerActivism
   },
   {
     label: 'Growth & Purpose',
-    prompt: 'Coaching, retreats, further study, purpose projects or less motivation?'
+    prompt: 'Coaching, retreats, further study, purpose projects or less motivation?',
+    icon: MdSchool
   }
 ];
 
@@ -177,7 +203,9 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
             fontSize: '4rem',
             marginBottom: '1rem',
             animation: 'bounce 2s ease-in-out infinite'
-          }}>💰</div>
+          }}>
+            <MdAttachMoney style={{ fontSize: '4rem', color: '#FFD700' }} />
+          </div>
           
           <h3 style={{
             color: '#B79BFF',
@@ -214,13 +242,17 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
       <div className="page2-cards-wrapper" style={{position: 'relative'}}>
         {LIFE_AREAS.slice(0, revealed).map((area, idx) => {
           const colorClass = idx % 3 === 0 ? 'card-dark' : idx % 3 === 1 ? 'card-green' : 'card-pink';
+          const IconComponent = area.icon;
           return (
             <div key={area.label} className={`page2-card ${colorClass}`} style={{
               opacity: 1,
               transform: 'translateY(0)',
               transition: 'all 0.4s ease'
             }}>
-              <div className="page2-card-label">{area.label}</div>
+              <div className="page2-card-label">
+                <IconComponent style={{ marginRight: '10px', verticalAlign: 'middle' }} />
+                {area.label}
+              </div>
               <div className="page2-card-prompt">{area.prompt}</div>
               <div className="page3-prev-label">Previous Selection</div>
               <div className="page2-slider-row">
@@ -285,6 +317,7 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
           className="btn btn-primary-active page2-complete-btn"
           onClick={() => onSubmit && onSubmit(newScores)}
         >
+          <MdCheckCircle style={{ marginRight: '8px', verticalAlign: 'middle' }} />
           Complete Assessment
         </button>
       )}
@@ -294,6 +327,7 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
       {/* Show the Remember box only for the first question */}
       {revealed === 1 && (
         <div className="page2-remember">
+          <MdStar style={{ marginRight: '8px', verticalAlign: 'middle', color: '#B79BFF' }} />
           <b>Remember</b><br/>
           Let the question under each heading guide your reflection<br/>
           <span className="page2-desc-em">There are no right answers here.</span>
