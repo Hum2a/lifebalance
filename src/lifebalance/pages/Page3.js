@@ -53,6 +53,42 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
     setNewScores(updated);
   };
 
+  const handleSliderRelease = (idx, value) => {
+    // Auto-advance to next card when slider is released
+    if (idx === revealed - 1 && revealed < LIFE_AREAS.length) {
+      const nextRevealed = revealed + 1;
+      setRevealed(nextRevealed);
+      
+      // Smart scroll to show the newly revealed card
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.page2-card');
+        if (cards.length > 0) {
+          const lastVisibleCard = cards[nextRevealed - 1]; // Index of the newly revealed card
+          if (lastVisibleCard) {
+            // Calculate position to show the card with some padding
+            const cardTop = lastVisibleCard.offsetTop;
+            const cardHeight = lastVisibleCard.offsetHeight;
+            const viewportHeight = window.innerHeight;
+            const scrollTarget = cardTop - (viewportHeight / 2) + (cardHeight / 2);
+            
+            // Ensure we don't scroll past the top
+            const finalScrollTarget = Math.max(0, scrollTarget);
+            
+            window.scrollTo({
+              top: finalScrollTarget,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }, 100); // Small delay to ensure the new card is rendered
+    }
+    
+    // If this was the last card and all are completed, submit the form
+    if (idx === LIFE_AREAS.length - 1 && revealed === LIFE_AREAS.length) {
+      if (onSubmit) onSubmit(newScores);
+    }
+  };
+
   const handleNext = (e) => {
     e.preventDefault();
     if (tutorialStep === 0) {
@@ -91,7 +127,7 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
   // Only show the tutorial slide if tutorialStep === 0
   if (tutorialStep === 0) {
     return (
-      <form className="page2-form" onSubmit={handleNext}>
+      <div className="page2-form">
         <h2 className="page2-title" style={{marginBottom: '2.5rem'}}>
           <span style={{color: '#97A1FF'}}>Now imagine a</span> full year's salary lands in your<br/>bank account <span style={{color: '#97A1FF'}}>tomorrow.</span>
         </h2>
@@ -163,15 +199,15 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
             different areas of your life...
           </p>
         </div>
-        <button type="submit" className="btn btn-primary-active">
+        <button type="button" className="btn btn-primary-active" onClick={() => setTutorialStep(1)}>
           Got it
         </button>
-      </form>
+      </div>
     );
   }
 
   return (
-    <form className="page2-form" onSubmit={handleNext}>
+    <div className="page2-form">
       <h2 className="page2-title">For each area, ask yourself: if you put extra money into it, what score do you think you could reach?</h2>
       <p className="page2-desc">
         Now slide to rate what you think your score in each factor will be from
@@ -222,6 +258,7 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
                     max={10}
                     value={newScores[idx]}
                     onChange={(value) => handleSliderChange(idx, value)}
+                    onAfterChange={(value) => handleSliderRelease(idx, value)}
                     className="page2-slider"
                     thumbClassName="page2-slider-thumb"
                     trackClassName="page2-slider-track"
@@ -244,9 +281,9 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
           );
         })}
       </div>
-      <button type="submit" className="btn btn-primary-active page2-next-btn page2-next-btn-absolute">
+      {/* <button type="submit" className="btn btn-primary-active page2-next-btn page2-next-btn-absolute">
         {revealed < LIFE_AREAS.length ? 'Next' : 'Complete'}
-      </button>
+      </button> */}
       {/* Show the Remember box only for the first question */}
       {revealed === 1 && (
         <div className="page2-remember">
@@ -255,7 +292,7 @@ const Page3 = ({ baseScores = [], onSubmit, onStepChange }) => {
           <span className="page2-desc-em">There are no right answers here.</span>
         </div>
       )}
-    </form>
+    </div>
   );
 };
 

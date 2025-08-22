@@ -69,6 +69,44 @@ const Page2 = ({ onSubmit, onStepChange }) => {
     setScores(newScores);
   };
 
+  const handleSliderRelease = (idx, value) => {
+    // Auto-advance to next card when slider is released
+    if (idx === revealed - 1 && revealed < LIFE_AREAS.length) {
+      const nextRevealed = revealed + 1;
+      setRevealed(nextRevealed);
+      // Set the newly revealed card index
+      setNewlyRevealedCard(nextRevealed - 1);
+      
+      // Smart scroll to show the newly revealed card
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.page2-card');
+        if (cards.length > 0) {
+          const lastVisibleCard = cards[nextRevealed - 1]; // Index of the newly revealed card
+          if (lastVisibleCard) {
+            // Calculate position to show the card with some padding
+            const cardTop = lastVisibleCard.offsetTop;
+            const cardHeight = lastVisibleCard.offsetHeight;
+            const viewportHeight = window.innerHeight;
+            const scrollTarget = cardTop - (viewportHeight / 2) + (cardHeight / 2);
+            
+            // Ensure we don't scroll past the top
+            const finalScrollTarget = Math.max(0, scrollTarget);
+            
+            window.scrollTo({
+              top: finalScrollTarget,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }, 100); // Small delay to ensure the new card is rendered
+    }
+    
+    // If this was the last card and all are completed, submit the form
+    if (idx === LIFE_AREAS.length - 1 && revealed === LIFE_AREAS.length) {
+      if (onSubmit) onSubmit(scores);
+    }
+  };
+
   const handleNext = (e) => {
     e.preventDefault();
     if (revealed < LIFE_AREAS.length) {
@@ -105,7 +143,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
   };
 
   return (
-    <form className="page2-form" onSubmit={handleNext}>
+    <div className="page2-form">
       <h2 className="page2-title">How are you really doing - right now?</h2>
       <p className="page2-desc">
         Slide to rate each part of your life from<br/>
@@ -129,6 +167,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
                     max={10}
                     value={scores[idx]}
                     onChange={(value) => handleSliderChange(idx, value)}
+                    onAfterChange={(value) => handleSliderRelease(idx, value)}
                     className="page2-slider"
                     thumbClassName="page2-slider-thumb"
                     trackClassName="page2-slider-track"
@@ -151,9 +190,9 @@ const Page2 = ({ onSubmit, onStepChange }) => {
           );
         })}
       </div>
-      <button type="submit" className="btn btn-primary-active page2-next-btn page2-next-btn-absolute">
+      {/* <button type="submit" className="btn btn-primary-active page2-next-btn page2-next-btn-absolute">
         {revealed < LIFE_AREAS.length ? 'Next' : 'Complete'}
-      </button>
+      </button> */}
       {revealed === 1 && (
         <div className="page2-remember">
           <b>Remember</b><br/>
@@ -161,7 +200,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
           <span className="page2-desc-em">There are no right answers here.</span>
         </div>
       )}
-    </form>
+    </div>
   );
 };
 

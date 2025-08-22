@@ -49,6 +49,42 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
     setNewScores(updated);
   };
 
+  const handleSliderRelease = (idx, value) => {
+    // Auto-advance to next card when slider is released
+    if (idx === revealed - 1 && revealed < LIFE_AREAS.length) {
+      const nextRevealed = revealed + 1;
+      setRevealed(nextRevealed);
+      
+      // Smart scroll to show the newly revealed card
+      setTimeout(() => {
+        const cards = document.querySelectorAll('.page2-card');
+        if (cards.length > 0) {
+          const lastVisibleCard = cards[nextRevealed - 1]; // Index of the newly revealed card
+          if (lastVisibleCard) {
+            // Calculate position to show the card with some padding
+            const cardTop = lastVisibleCard.offsetTop;
+            const cardHeight = lastVisibleCard.offsetHeight;
+            const viewportHeight = window.innerHeight;
+            const scrollTarget = cardTop - (viewportHeight / 2) + (cardHeight / 2);
+            
+            // Ensure we don't scroll past the top
+            const finalScrollTarget = Math.max(0, scrollTarget);
+            
+            window.scrollTo({
+              top: finalScrollTarget,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }, 100); // Small delay to ensure the new card is rendered
+    }
+    
+    // If this was the last card and all are completed, submit the form
+    if (idx === LIFE_AREAS.length - 1 && revealed === LIFE_AREAS.length) {
+      if (onFinish) onFinish(newScores);
+    }
+  };
+
   const handleNext = (e) => {
     e.preventDefault();
     if (tutorialStep === 0) {
@@ -87,7 +123,7 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
   // Tutorial slide first
   if (tutorialStep === 0) {
     return (
-      <form className="page2-form" onSubmit={handleNext}>
+      <div className="page2-form">
         <h2 className="page2-title" style={{marginBottom: '2.5rem'}}>
           <span style={{color: '#97A1FF', fontWeight: 600}}>Now imagine if you had</span>
           <span style={{color: 'white', fontWeight: 400}}> an extra 12 hours of </span>
@@ -163,15 +199,15 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
             how could you transform your life?
           </p>
         </div>
-        <button type="submit" className="btn btn-primary-active">
+        <button type="button" className="btn btn-primary-active" onClick={() => setTutorialStep(1)}>
           Got it
         </button>
-      </form>
+      </div>
     );
   }
 
   return (
-    <form className="page2-form" onSubmit={handleNext}>
+    <div className="page2-form">
       <h2 className="page2-title" style={{marginBottom: '1.5rem', textAlign: 'center'}}>
         Ask yourself, how would more time affect these <br/>
         parts of your life?
@@ -224,6 +260,7 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
                     max={10}
                     value={newScores[idx]}
                     onChange={(value) => handleSliderChange(idx, value)}
+                    onAfterChange={(value) => handleSliderRelease(idx, value)}
                     className="page2-slider"
                     thumbClassName="page2-slider-thumb"
                     trackClassName="page2-slider-track"
@@ -246,9 +283,9 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
           );
         })}
       </div>
-      <button type="submit" className="btn btn-primary-active page2-next-btn page2-next-btn-absolute">
+      {/* <button type="submit" className="btn btn-primary-active page2-next-btn page2-next-btn-absolute">
         {revealed < LIFE_AREAS.length ? 'Next' : 'Finish'}
-      </button>
+      </button> */}
       {/* Show the Remember box only for the first question */}
       {revealed === 1 && (
         <div className="page2-remember">
@@ -257,7 +294,7 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
           <span className="page2-desc-em">There are no right answers here.</span>
         </div>
       )}
-    </form>
+    </div>
   );
 };
 
