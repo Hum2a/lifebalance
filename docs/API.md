@@ -2,419 +2,332 @@
 
 ## Overview
 
-This document provides comprehensive documentation for the LifeBalance application's components, functions, and APIs. LifeBalance is a React-based application that helps users assess their life satisfaction across multiple dimensions.
+LifeBalance is a React-based life assessment application that provides a comprehensive interface for users to evaluate their life satisfaction across multiple areas and explore the impact of additional resources.
 
-## 🧩 Component API Reference
+## Core Components
 
-### App Component
+### LifeBalanceHeader
+**Location**: `src/lifebalance/components/LifeBalanceHeader.js`
 
-The main application component that manages routing and global state.
+**Props**:
+- `currentStep` (number): Current step in the assessment process
+- `totalSteps` (number): Total number of steps in the assessment
 
-#### Props
-None (root component)
+**Features**:
+- Logo display with WhiteLogo.png
+- Progress indicator with Material Design icon
+- Responsive design for all screen sizes
 
-#### State
+**Example**:
+```jsx
+<LifeBalanceHeader currentStep={3} totalSteps={7} />
+```
+
+### WelcomePage
+**Location**: `src/lifebalance/pages/WelcomePage.js`
+
+**Props**:
+- `onNext` (function): Callback when user proceeds to assessment
+
+**Features**:
+- Welcome message with star icon
+- Two information sections with trending and assessment icons
+- Journey screen with checkmark icon
+- Play arrow icons for action buttons
+
+**State**:
+- `showJourneyScreen` (boolean): Controls display of journey screen
+
+### Page2 (Life Assessment)
+**Location**: `src/lifebalance/pages/Page2.js`
+
+**Props**:
+- `onSubmit` (function): Callback with assessment scores
+- `onStepChange` (function): Callback for step progression
+
+**Features**:
+- 7 life areas with Material Design icons
+- Interactive sliders with enhanced thumbs
+- Auto-advancing cards on slider release
+- Smart scrolling to newly revealed content
+- Complete button with checkmark icon
+
+**Life Areas**:
 ```javascript
-{
-  currentPage: number,        // Current page number (1-5)
-  currentScores: number[],    // Current life assessment scores
-  moneyScores: number[],      // Money impact assessment scores
-  timeScores: number[]        // Time impact assessment scores
+const LIFE_AREAS = [
+  { label: 'Health & Well-being', icon: MdHealthAndSafety, prompt: '...' },
+  { label: 'Family & Connections', icon: MdFamilyRestroom, prompt: '...' },
+  { label: 'Career & Income', icon: MdWork, prompt: '...' },
+  { label: 'Lifestyle, Spending & Fun', icon: MdCelebration, prompt: '...' },
+  { label: 'Housing, Safety & Security', icon: MdHome, prompt: '...' },
+  { label: 'Giving & Contribution', icon: MdVolunteerActivism, prompt: '...' },
+  { label: 'Personal Growth & Purpose', icon: MdSchool, prompt: '...' }
+];
+```
+
+### Page3 (Money Impact Assessment)
+**Location**: `src/lifebalance/pages/Page3.js`
+
+**Props**:
+- `baseScores` (array): Scores from Page2 assessment
+- `onSubmit` (function): Callback with money impact scores
+- `onStepChange` (function): Callback for step progression
+
+**Features**:
+- Tutorial slide with money icon and animations
+- Same life areas with icons as Page2
+- Previous selection display
+- New slider for money impact assessment
+- Auto-advancing functionality
+
+### Page4 (Time Impact Assessment)
+**Location**: `src/lifebalance/pages/Page4.js`
+
+**Props**:
+- `baseScores` (array): Scores from Page2 assessment
+- `onFinish` (function): Callback with time impact scores
+- `onStepChange` (function): Callback for step progression
+
+**Features**:
+- Tutorial slide with clock icon and animations
+- Same life areas with icons as Page2
+- Previous selection display
+- New slider for time impact assessment
+- Auto-advancing functionality
+
+### Page5 (Results & Export)
+**Location**: `src/lifebalance/pages/Page5.js`
+
+**Props**:
+- `averages` (object): Average scores for now, money, and time
+- `biggestMoney` (object): Area with biggest money impact
+- `biggestTime` (object): Area with biggest time impact
+- `onSubmit` (function): Callback when user finishes
+
+**Features**:
+- Personal snapshot with comprehensive data display
+- Action recommendations with money and time icons
+- Key takeaway section with assessment icon
+- Export functionality with multiple options
+- Debug tools for troubleshooting
+
+**Export Functions**:
+```javascript
+const downloadAsImage = async () => {
+  // Generates high-quality PNG of current page
+  // Uses html2canvas with optimized settings
+};
+
+const downloadAsPDF = async () => {
+  // Generates professional PDF report
+  // Uses jsPDF with A4 formatting
+};
+```
+
+## Data Flow
+
+### Assessment Flow
+1. **WelcomePage** → User starts assessment
+2. **Page2** → User rates current life satisfaction (7 areas)
+3. **Page3** → User rates potential money impact (7 areas)
+4. **Page4** → User rates potential time impact (7 areas)
+5. **Page5** → Results display and export options
+
+### Score Calculation
+```javascript
+// Averages calculation
+const avg = arr => arr.length ? (arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(1) : '-';
+
+// Biggest jump calculation
+let biggestMoney = { area: '', value: 0 };
+if (baseScores.length && cashScores.length) {
+  let maxDiff = -Infinity;
+  LIFE_AREAS.forEach((area, i) => {
+    const diff = cashScores[i] - baseScores[i];
+    if (diff > maxDiff) {
+      maxDiff = diff;
+      biggestMoney = { area, value: +(diff.toFixed(1)) };
+    }
+  });
 }
 ```
 
-#### Methods
-- `handlePageChange(pageNumber)`: Updates the current page
-- `handleCurrentScores(scores)`: Updates current life assessment scores
-- `handleMoneyScores(scores)`: Updates money impact assessment scores
-- `handleTimeScores(scores)`: Updates time impact assessment scores
+## Icon System
 
-#### Example Usage
-```javascript
-<App />
-```
+### Material Design Icons
+All icons are imported from `react-icons/md` and provide semantic meaning:
 
----
+- **MdHealthAndSafety**: Health & Well-being
+- **MdFamilyRestroom**: Family & Connections
+- **MdWork**: Career & Income
+- **MdCelebration**: Lifestyle & Fun
+- **MdHome**: Housing & Security
+- **MdVolunteerActivism**: Giving & Contribution
+- **MdSchool**: Growth & Purpose
+- **MdCheckCircle**: Completion actions
+- **MdTrendingUp**: Progress and improvement
+- **MdStar**: Important information
+- **MdPlayArrow**: Start actions
+- **MdDownload**: Export actions
+- **MdPictureAsPdf**: PDF export
+- **MdBugReport**: Debug tools
 
-### LifeBalanceHeader Component
-
-Header component displaying the application logo and progress indicator.
-
-#### Props
-```javascript
-{
-  currentPage: number,        // Current page number
-  totalPages: number          // Total number of pages
-}
-```
-
-#### State
-None
-
-#### Methods
-None
-
-#### Example Usage
-```javascript
-<LifeBalanceHeader 
-  currentPage={2} 
-  totalPages={5} 
+### Icon Implementation
+```jsx
+<IconComponent 
+  style={{ 
+    marginRight: '10px', 
+    verticalAlign: 'middle' 
+  }} 
 />
 ```
 
----
+## Animation System
 
-### WelcomePage Component
+### Entrance Animations
+- **Staggered Timing**: Elements appear with 0.2s intervals
+- **Fade-in Effects**: Smooth opacity and transform transitions
+- **Responsive**: Faster animations on mobile devices
 
-Introduction page explaining the application purpose and functionality.
+### Hover Effects
+- **Shimmer**: Light sweeps across interactive elements
+- **Transform**: Subtle lift and scale effects
+- **Shadow**: Enhanced depth on interaction
 
-#### Props
-```javascript
-{
-  onStart: function           // Callback when user starts assessment
+### CSS Animations
+```css
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 ```
 
-#### State
-None
+## Export System
 
-#### Methods
-- `handleStart()`: Triggers the onStart callback
+### Image Export
+- **Format**: High-quality PNG
+- **Resolution**: 2x scale for crisp output
+- **Background**: Maintains dark theme
+- **Content**: Captures all dynamic data and styling
 
-#### Example Usage
+### PDF Export
+- **Format**: A4 PDF with multiple pages if needed
+- **Quality**: High-resolution image embedding
+- **Layout**: Professional formatting for printing
+- **File Naming**: Automatic date-based naming
+
+### Export Configuration
 ```javascript
-<WelcomePage onStart={() => handlePageChange(2)} />
+const exportConfig = {
+  backgroundColor: '#0D0C20',
+  scale: 2,
+  useCORS: true,
+  allowTaint: true,
+  foreignObjectRendering: false,
+  onclone: (clonedDoc) => {
+    // Ensure proper styling during capture
+  }
+};
 ```
 
----
+## Responsive Design
 
-### Page2 Component (Life Assessment)
+### Breakpoints
+- **Mobile**: 320px - 767px
+- **Tablet**: 768px - 1199px
+- **Desktop**: 1200px+
 
-Component for assessing current life satisfaction across 7 life areas.
+### Mobile Optimizations
+- **Larger Touch Targets**: Enhanced slider thumbs
+- **Touch-Friendly**: Optimized button sizes
+- **Smooth Scrolling**: Native-like experience
+- **Safari Compatibility**: Special handling for iOS
 
-#### Props
-```javascript
-{
-  onSubmit: function(scores), // Callback with assessment scores
-  onStepChange: function(step) // Callback when step changes
+### CSS Responsiveness
+```css
+@media (max-width: 768px) {
+  .page2-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
 }
-```
 
-#### State
-```javascript
-{
-  scores: number[],           // Array of 7 scores (0-10)
-  revealed: number,           // Number of revealed assessment cards
-  newlyRevealedCard: number  // Index of newly revealed card
-}
-```
-
-#### Methods
-- `handleSliderChange(idx, value)`: Updates score for specific life area
-- `handleNext()`: Advances to next step or completes assessment
-- `scrollToNewCard()`: Scrolls to newly revealed assessment card
-
-#### Life Areas
-1. **Health & Well-being**: Physical and mental health assessment
-2. **Family & Connections**: Relationships and social support
-3. **Career & Income**: Professional satisfaction and financial security
-4. **Lifestyle, Spending & Fun**: Entertainment and quality of life
-5. **Housing, Safety & Security**: Living environment and personal safety
-6. **Giving & Contribution**: Community involvement and philanthropy
-7. **Personal Growth & Purpose**: Learning and life direction
-
-#### Example Usage
-```javascript
-<Page2 
-  onSubmit={(scores) => handleCurrentScores(scores)}
-  onStepChange={(step) => console.log(`Step ${step}`)}
-/>
-```
-
----
-
-### Page3 Component (Money Impact)
-
-Component for assessing how additional money would impact life areas.
-
-#### Props
-```javascript
-{
-  baseScores: number[],       // Previous assessment scores
-  onSubmit: function(scores), // Callback with money impact scores
-  onStepChange: function(step) // Callback when step changes
-}
-```
-
-#### State
-```javascript
-{
-  tutorialStep: number,       // Tutorial step (0 or 1)
-  newScores: number[],        // New assessment scores
-  revealed: number            // Number of revealed assessment cards
-}
-```
-
-#### Methods
-- `handleSliderChange(idx, value)`: Updates score for specific life area
-- `handleNext()`: Advances tutorial or assessment
-- `scrollToNewCard()`: Scrolls to newly revealed assessment card
-
-#### Example Usage
-```javascript
-<Page3 
-  baseScores={[5, 6, 7, 4, 8, 6, 5]}
-  onSubmit={(scores) => handleMoneyScores(scores)}
-  onStepChange={(step) => console.log(`Step ${step}`)}
-/>
-```
-
----
-
-### Page4 Component (Time Impact)
-
-Component for assessing how additional time would impact life areas.
-
-#### Props
-```javascript
-{
-  baseScores: number[],       // Previous assessment scores
-  onFinish: function(scores), // Callback with time impact scores
-  onStepChange: function(step) // Callback when step changes
-}
-```
-
-#### State
-```javascript
-{
-  tutorialStep: number,       // Tutorial step (0 or 1)
-  newScores: number[],        // New assessment scores
-  revealed: number            // Number of revealed assessment cards
-}
-```
-
-#### Methods
-- `handleSliderChange(idx, value)`: Updates score for specific life area
-- `handleNext()`: Advances tutorial or assessment
-- `scrollToNewCard()`: Scrolls to newly revealed assessment card
-
-#### Example Usage
-```javascript
-<Page4 
-  baseScores={[5, 6, 7, 4, 8, 6, 5]}
-  onFinish={(scores) => handleTimeScores(scores)}
-  onStepChange={(step) => console.log(`Step ${step}`)}
-/>
-```
-
----
-
-### Page5 Component (Results)
-
-Component displaying assessment results and personalized recommendations.
-
-#### Props
-```javascript
-{
-  averages: object,           // Average scores object
-  biggestMoney: object,       // Biggest money impact area
-  biggestTime: object         // Biggest time impact area
-}
-```
-
-#### Props Structure
-```javascript
-{
-  averages: {
-    now: number,              // Current average score
-    money: number,            // Money impact average score
-    time: number              // Time impact average score
-  },
-  biggestMoney: {
-    area: string,             // Life area with biggest money impact
-    value: number             // Impact value
-  },
-  biggestTime: {
-    area: string,             // Life area with biggest time impact
-    value: number             // Impact value
+@media (min-width: 769px) {
+  .page2-slider-thumb {
+    width: 32px;
+    height: 32px;
   }
 }
 ```
 
-#### State
-None
+## Performance Optimizations
 
-#### Methods
-None
+### Animation Performance
+- **Hardware Acceleration**: Uses transform and opacity
+- **Reduced Motion**: Respects user preferences
+- **Efficient Transitions**: Cubic-bezier easing
+- **Mobile Optimization**: Faster animations on small screens
 
-#### Example Usage
+### Export Performance
+- **Async Processing**: Non-blocking export operations
+- **Memory Management**: Proper cleanup of temporary elements
+- **Error Handling**: Graceful fallbacks for failed exports
+- **Progress Feedback**: User feedback during export process
+
+## Browser Compatibility
+
+### Supported Browsers
+- **Chrome**: 90+
+- **Firefox**: 88+
+- **Safari**: 14+
+- **Edge**: 90+
+
+### Safari-Specific Features
+- **Touch Handling**: Optimized for iOS Safari
+- **Animation Support**: Hardware-accelerated animations
+- **Export Compatibility**: Special handling for Safari rendering
+
+## Error Handling
+
+### Export Errors
 ```javascript
-<Page5 
-  averages={{ now: 6.1, money: 7.8, time: 7.3 }}
-  biggestMoney={{ area: 'Health & Well-being', value: 3.0 }}
-  biggestTime={{ area: 'Health & Well-being', value: 2.5 }}
-/>
-```
-
----
-
-## 🔧 Utility Functions
-
-### Score Calculations
-
-#### calculateAverages(scores)
-Calculates average scores from assessment arrays.
-
-**Parameters:**
-- `scores` (object): Object containing currentScores, moneyScores, timeScores
-
-**Returns:**
-```javascript
-{
-  now: number,      // Average of current scores
-  money: number,    // Average of money impact scores
-  time: number      // Average of time impact scores
+try {
+  const canvas = await html2canvas(element, config);
+  // Process export
+} catch (error) {
+  console.error('Export failed:', error);
+  // Show user-friendly error message
+  // Clean up any temporary state
 }
 ```
 
-**Example:**
-```javascript
-const averages = calculateAverages({
-  currentScores: [5, 6, 7, 4, 8, 6, 5],
-  moneyScores: [7, 8, 9, 6, 8, 7, 7],
-  timeScores: [6, 7, 8, 5, 7, 6, 6]
-});
-// Returns: { now: 5.86, money: 7.43, time: 6.43 }
-```
+### Navigation Errors
+- **Fallback Scrolling**: Manual scroll if smart scroll fails
+- **State Recovery**: Maintains user progress on errors
+- **User Feedback**: Clear error messages and recovery options
 
-#### findBiggestImpact(currentScores, impactScores)
-Finds the life area with the biggest improvement from additional resources.
+## Future Enhancements
 
-**Parameters:**
-- `currentScores` (number[]): Current assessment scores
-- `impactScores` (number[]): Impact assessment scores
+### Planned Features
+- **Data Persistence**: Save progress locally
+- **Social Sharing**: Share results on social media
+- **Progress Tracking**: Historical assessment comparison
+- **Customization**: User-defined life areas
+- **Analytics**: Usage and improvement insights
 
-**Returns:**
-```javascript
-{
-  area: string,     // Life area name
-  value: number     // Improvement value
-}
-```
-
-**Example:**
-```javascript
-const biggestMoney = findBiggestImpact(
-  [5, 6, 7, 4, 8, 6, 5],
-  [7, 8, 9, 6, 8, 7, 7]
-);
-// Returns: { area: 'Career & Income', value: 2.0 }
-```
-
----
-
-## 🎨 Styling API
-
-### CSS Classes
-
-#### Component-Specific Classes
-- `.page2-form`: Form container for Page2
-- `.page2-card`: Assessment card styling
-- `.page2-slider`: Slider component styling
-- `.page3-prev-slider`: Previous selection slider styling
-- `.page5-container`: Results page container
-- `.snapshot-*`: Results display styling
-
-#### Utility Classes
-- `.btn`: Base button styling
-- `.btn-primary`: Primary button variant
-- `.btn-primary-active`: Active primary button
-- `.card-*`: Card color variants (dark, green, pink)
-
-#### Responsive Classes
-- Mobile-first approach with breakpoints
-- Fluid typography using clamp()
-- Flexible layouts with CSS Grid and Flexbox
-
----
-
-## 📱 Responsive Design API
-
-### Breakpoints
-```css
-/* Mobile First */
-@media (min-width: 768px) { /* Tablet */ }
-@media (min-width: 1024px) { /* Desktop */ }
-@media (min-width: 1440px) { /* Large Desktop */ }
-```
-
-### Viewport Units
-- `vw`: Viewport width for responsive sizing
-- `vh`: Viewport height for responsive spacing
-- `clamp()`: Fluid typography and spacing
-
----
-
-## 🔒 Security Considerations
-
-### Input Validation
-- Slider values are constrained to 0-10 range
-- No user input is stored permanently
-- All data processing happens client-side
-
-### Data Privacy
-- No external API calls
-- No user data collection
-- Local storage only for session data
-
----
-
-## 🧪 Testing API
-
-### Component Testing
-```javascript
-import { render, screen, fireEvent } from '@testing-library/react';
-import Page2 from '../Page2';
-
-test('renders life assessment form', () => {
-  render(<Page2 onSubmit={jest.fn()} onStepChange={jest.fn()} />);
-  expect(screen.getByText('How are you really doing - right now?')).toBeInTheDocument();
-});
-```
-
-### Function Testing
-```javascript
-import { calculateAverages } from '../utils';
-
-test('calculates averages correctly', () => {
-  const result = calculateAverages({
-    currentScores: [5, 5, 5],
-    moneyScores: [7, 7, 7],
-    timeScores: [6, 6, 6]
-  });
-  expect(result.now).toBe(5);
-  expect(result.money).toBe(7);
-  expect(result.time).toBe(6);
-});
-```
-
----
-
-## 📚 Additional Resources
-
-- [React Documentation](https://reactjs.org/docs/)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
-- [CSS Best Practices](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-
----
-
-## 🔄 Version History
-
-- **v1.0.0**: Initial API documentation
-- **v0.2.0**: Added component testing examples
-- **v0.1.0**: Basic component documentation
-
----
-
-*This API documentation is maintained by the LifeBalance development team.*
+### Technical Improvements
+- **PWA Support**: Offline functionality
+- **Performance**: Further animation optimizations
+- **Accessibility**: Enhanced screen reader support
+- **Internationalization**: Multi-language support
