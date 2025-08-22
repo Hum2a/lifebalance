@@ -50,7 +50,7 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
   };
 
   const handleSliderRelease = (idx, value) => {
-    // Auto-advance to next card when slider is released
+    // Auto-advance to next card when slider is released (but not on the last card)
     if (idx === revealed - 1 && revealed < LIFE_AREAS.length) {
       const nextRevealed = revealed + 1;
       setRevealed(nextRevealed);
@@ -79,10 +79,7 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
       }, 100); // Small delay to ensure the new card is rendered
     }
     
-    // If this was the last card and all are completed, submit the form
-    if (idx === LIFE_AREAS.length - 1 && revealed === LIFE_AREAS.length) {
-      if (onFinish) onFinish(newScores);
-    }
+    // Remove auto-submission - users must click the complete button
   };
 
   const handleNext = (e) => {
@@ -283,6 +280,16 @@ const Page4 = ({ baseScores = [], onFinish, onStepChange }) => {
           );
         })}
       </div>
+      {/* Show complete button when all cards are revealed */}
+      {revealed === LIFE_AREAS.length && (
+        <button 
+          type="button" 
+          className="btn btn-primary-active page2-complete-btn"
+          onClick={() => onFinish && onFinish(newScores)}
+        >
+          Complete Assessment
+        </button>
+      )}
       {/* <button type="submit" className="btn btn-primary-active page2-next-btn page2-next-btn-absolute">
         {revealed < LIFE_AREAS.length ? 'Next' : 'Finish'}
       </button> */}
