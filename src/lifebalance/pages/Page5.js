@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import '../styles/Page5.css';
 
 const MONEY_ACTIONS = [
@@ -68,12 +70,200 @@ const Page5 = ({
   biggestMoney = { area: 'Health & Wellbeing', value: 3.0 },
   biggestTime = { area: 'Health & Wellbeing', value: 2.5 },
 }) => {
+  const pageRef = useRef(null);
+
   // Find the recommended action for the biggest jump area
   const moneyAction = MONEY_ACTIONS.find(a => a.area === biggestMoney.area)?.action || getFallbackMoneyAction(averages, biggestMoney);
   const timeAction = TIME_ACTIONS.find(a => a.area === biggestTime.area)?.action || getFallbackTimeAction(averages, biggestTime);
 
+  const downloadAsImage = async () => {
+    if (!pageRef.current) return;
+    
+    try {
+      // Force a re-render to ensure all data is visible
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      // Temporarily add export attribute for better styling
+      pageRef.current.setAttribute('data-exporting', 'true');
+      
+      // Force all content to be visible and rendered
+      const allElements = pageRef.current.querySelectorAll('*');
+      allElements.forEach(el => {
+        if (el.style.display === 'none') el.style.display = 'block';
+        if (el.style.visibility === 'hidden') el.style.visibility = 'visible';
+        if (el.style.opacity === '0') el.style.opacity = '1';
+      });
+      
+      const canvas = await html2canvas(pageRef.current, {
+        backgroundColor: '#0D0C20',
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        logging: true, // Enable logging temporarily for debugging
+        width: undefined,
+        height: undefined,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: undefined,
+        windowHeight: undefined,
+        foreignObjectRendering: false,
+        removeContainer: false,
+        ignoreElements: (element) => {
+          // Don't ignore any elements - capture everything
+          return false;
+        },
+        onclone: (clonedDoc) => {
+          // Ensure the cloned element maintains proper styling
+          const clonedElement = clonedDoc.querySelector('.page5-container');
+          if (clonedElement) {
+            clonedElement.style.width = '100%';
+            clonedElement.style.height = 'auto';
+            clonedElement.style.position = 'relative';
+            clonedElement.style.overflow = 'visible';
+            clonedElement.style.display = 'flex';
+            clonedElement.style.flexDirection = 'column';
+            clonedElement.style.alignItems = 'center';
+          }
+          
+          // Ensure all text content is visible
+          const allTextElements = clonedDoc.querySelectorAll('*');
+          allTextElements.forEach(el => {
+            if (el.style.display === 'none') el.style.display = 'block';
+            if (el.style.visibility === 'hidden') el.style.visibility = 'visible';
+            if (el.style.opacity === '0') el.style.opacity = '1';
+          });
+        }
+      });
+      
+      // Remove export attribute
+      pageRef.current.removeAttribute('data-exporting');
+      
+      const link = document.createElement('a');
+      link.download = `life-balance-snapshot-${new Date().toISOString().split('T')[0]}.png`;
+      link.href = canvas.toDataURL('image/png', 1.0);
+      link.click();
+    } catch (error) {
+      console.error('Error generating image:', error);
+      // Ensure export attribute is removed even on error
+      if (pageRef.current) {
+        pageRef.current.removeAttribute('data-exporting');
+      }
+      alert('Failed to generate image. Please try again.');
+    }
+  };
+
+  const downloadAsPDF = async () => {
+    if (!pageRef.current) return;
+    
+    try {
+      // Force a re-render to ensure all data is visible
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      // Temporarily add export attribute for better styling
+      pageRef.current.setAttribute('data-exporting', 'true');
+      
+      // Force all content to be visible and rendered
+      const allElements = pageRef.current.querySelectorAll('*');
+      allElements.forEach(el => {
+        if (el.style.display === 'none') el.style.display = 'block';
+        if (el.style.visibility === 'hidden') el.style.visibility = 'visible';
+        if (el.style.opacity === '0') el.style.opacity = '1';
+      });
+      
+      const canvas = await html2canvas(pageRef.current, {
+        backgroundColor: '#0D0C20',
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        logging: true, // Enable logging temporarily for debugging
+        width: undefined,
+        height: undefined,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: undefined,
+        windowHeight: undefined,
+        foreignObjectRendering: false,
+        removeContainer: false,
+        ignoreElements: (element) => {
+          // Don't ignore any elements - capture everything
+          return false;
+        },
+        onclone: (clonedDoc) => {
+          // Ensure the cloned element maintains proper styling
+          const clonedElement = clonedDoc.querySelector('.page5-container');
+          if (clonedElement) {
+            clonedElement.style.width = '100%';
+            clonedElement.style.height = 'auto';
+            clonedElement.style.position = 'relative';
+            clonedElement.style.overflow = 'visible';
+            clonedElement.style.display = 'flex';
+            clonedElement.style.flexDirection = 'column';
+            clonedElement.style.alignItems = 'center';
+          }
+          
+          // Ensure all text content is visible
+          const allTextElements = clonedDoc.querySelectorAll('*');
+          allTextElements.forEach(el => {
+            if (el.style.display === 'none') el.style.display = 'block';
+            if (el.style.visibility === 'hidden') el.style.visibility = 'visible';
+            if (el.style.opacity === '0') el.style.opacity = '1';
+          });
+        }
+      });
+      
+      // Remove export attribute
+      pageRef.current.removeAttribute('data-exporting');
+      
+      const imgData = canvas.toDataURL('image/png', 1.0);
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      const imgWidth = 210; // A4 width in mm
+      const pageHeight = 295; // A4 height in mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      
+      let position = 0;
+      
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+      
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      
+      pdf.save(`life-balance-snapshot-${new Date().toISOString().split('T')[0]}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      // Ensure export attribute is removed even on error
+      if (pageRef.current) {
+        pageRef.current.removeAttribute('data-exporting');
+      }
+      alert('Failed to generate PDF. Please try again.');
+    }
+  };
+
+  // Debug function to check what data is being rendered
+  const debugExport = () => {
+    console.log('Page5 Debug Info:');
+    console.log('Page Ref:', pageRef.current);
+    console.log('Averages:', averages);
+    console.log('Biggest Money:', biggestMoney);
+    console.log('Biggest Time:', biggestTime);
+    console.log('Money Action:', moneyAction);
+    console.log('Time Action:', timeAction);
+    console.log('Page Dimensions:', {
+      scrollWidth: pageRef.current?.scrollWidth,
+      scrollHeight: pageRef.current?.scrollHeight,
+      clientWidth: pageRef.current?.clientWidth,
+      clientHeight: pageRef.current?.clientHeight
+    });
+  };
+
   return (
-    <div className="page5-container custom-layout">
+    <div className="page5-container custom-layout" ref={pageRef}>
       <h2 className="page5-title snapshot-title">
         Here's your <span className="snapshot-accent">Personal Snapshot</span>
       </h2>
@@ -128,6 +318,31 @@ const Page5 = ({
       </div>
       <div className="snapshot-key-takeaway">
         Money is only a tool – its real power is the freedom and security it can buy. Yet time is a resource you can never earn back. This exercise shows where extra cash or extra hours would truly change your life, so you can aim for independence and contentment instead of simply chasing more money at the cost of other things.
+      </div>
+
+      {/* Download/Export Section */}
+      <div className="snapshot-section-divider">
+        <span className="snapshot-section-title">Save Your Snapshot</span>
+      </div>
+      <div className="snapshot-download-row">
+        <button 
+          className="snapshot-download-btn snapshot-download-image"
+          onClick={downloadAsImage}
+        >
+          📱 Download as Image
+        </button>
+        <button 
+          className="snapshot-download-btn snapshot-download-pdf"
+          onClick={downloadAsPDF}
+        >
+          📄 Download as PDF
+        </button>
+        <button 
+          className="snapshot-download-btn snapshot-download-debug"
+          onClick={debugExport}
+        >
+          🐛 Debug Export
+        </button>
       </div>
     </div>
   );
