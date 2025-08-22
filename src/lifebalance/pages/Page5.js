@@ -380,12 +380,12 @@ const Page5 = ({
         >
           <MdPictureAsPdf /> Download as PDF
         </button>
-        <button 
+        {/* <button 
           className="snapshot-download-btn snapshot-download-debug"
           onClick={debugExport}
         >
           <MdBugReport /> Debug Export
-        </button>
+        </button> */}
       </div>
     </div>
   );
