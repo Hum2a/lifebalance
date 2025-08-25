@@ -943,17 +943,17 @@
   }
   
   .page2-slider-thumb {
-    width: 24px !important;
-    height: 24px !important;
-    font-size: 0.75rem !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1.25rem !important;
   }
   
   .page2-slider-value-inside {
-    font-size: 0.625rem;
+    font-size: 1.25rem;
   }
   
   .page2-slider-labels {
-    font-size: 0.625rem;
+    font-size: 1.25rem;
     width: 100%;
     max-width: 100%;
     padding: 0;
