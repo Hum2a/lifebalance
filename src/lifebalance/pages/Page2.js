@@ -211,7 +211,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
           );
         })}
       </div>
-      {/* Show complete button when all cards are revealed */}
+      {/* Show next button when all cards are revealed */}
       {revealed === LIFE_AREAS.length && (
         <button 
           type="button" 
@@ -219,7 +219,7 @@ const Page2 = ({ onSubmit, onStepChange }) => {
           onClick={() => onSubmit && onSubmit(scores)}
         >
           <MdCheckCircle style={{ marginRight: '8px', verticalAlign: 'middle' }} />
-          Complete Assessment
+          Next
         </button>
       )}
       {/* <button type="submit" className="btn btn-primary-active page2-next-btn page2-next-btn-absolute">
